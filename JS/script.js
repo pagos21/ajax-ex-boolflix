@@ -22,27 +22,37 @@ function writeAPI(userMovie){
 
     success: function(data, state) {
       var moviesfromAPI = data["results"];
+      console.log("yo ".repeat(3));
       for (var i = 0; i < moviesfromAPI.length; i++) {
         var titlefromAPI = moviesfromAPI[i].title;
         var origTitlefromAPI = moviesfromAPI[i].original_title;
         var langfromAPI = moviesfromAPI[i].original_language;
         var votefromAPI = moviesfromAPI[i].vote_average;
+        var voteFrom10to5 = Math.ceil(votefromAPI / 2);
+        starMultiplier(voteFrom10to5)
+        // voteConverter(votefromAPI);
 
         var movie2html = compiled({ title:titlefromAPI,
                                     origTitle:origTitlefromAPI,
                                     lang:langfromAPI,
-                                    vote:votefromAPI})
+                                    voteExtended: votefromAPI,
+                                    vote: voteFrom10to5 })
+
         target.append(movie2html);
-      }
-
+      }//for
     },
-
     error:function (error) {
       console.log('error');
     }
-  })
+  }) // ajax
 
+} // function
+
+function starMultiplier(voteFrom10to5){
+  var test = $("#littlestar").clone();
+  for (var i = 0; i < voteFrom10to5; i++) {
+    console.log("N stelline");
+  }
 }
-
 
 $(document).ready(init);
