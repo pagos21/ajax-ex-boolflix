@@ -29,17 +29,21 @@ function writeAPI(userMovie){
         var langfromAPI = moviesfromAPI[i].original_language;
         var votefromAPI = moviesfromAPI[i].vote_average;
         var voteFrom10to5 = Math.ceil(votefromAPI / 2);
+        var test1 = starMultiplier2(voteFrom10to5);
+
         // voteConverter(votefromAPI);
 
         var movie2html = compiled({ title:titlefromAPI,
                                     origTitle:origTitlefromAPI,
                                     lang:langfromAPI,
                                     voteExtended: votefromAPI,
-                                    stars: "<i id='littlestar' class='far fa-star'></i>"
+                                    stars: test1
                                     })
 
-        // var test0 = starMultiplier(movie2html, voteFrom10to5);
+
         target.append(movie2html);
+
+
 
       }//for
     },
@@ -49,6 +53,18 @@ function writeAPI(userMovie){
   }) // ajax
 
 } // function
+
+function starMultiplier2(voteFrom10to5){
+  var test1 = "";
+  for (var i = 0; i < voteFrom10to5; i++) {
+    test1 = test1 + "<i class='far fa-star'></i>";
+  }
+  console.log(test1);
+  // var toprint = $("#starElement").append(test1);
+  return test1;
+
+}
+
 
 function starMultiplier(movie2html, voteFrom10to5){
   var test1 = "";
@@ -61,7 +77,7 @@ function starMultiplier(movie2html, voteFrom10to5){
   console.log(allStars);
 
   console.log(allStars2);
-  var movietest = $(movie2html).find("#starElement").append(allStars2);
+  var movietest = allStars.append(allStars2);
   return movietest;
 }
 
