@@ -1,5 +1,6 @@
 
 function init(){
+
   $("#btn").click(function(){
     var userMoviesOrTV = $("#inp").val();
     writeAPI(userMoviesOrTV);
@@ -7,22 +8,22 @@ function init(){
 
 }
 
-
-// ##### functions Sec #####
+// ##### MAIN functions Sec #####
 function writeAPI(userMoviesOrTV){
-
-  callFilms(userMoviesOrTV);
-  callTVseries(userMoviesOrTV);
-
-
-} // function
-
-
-function callFilms(userMoviesOrTV){
   var template = $("#template").html();
   var compiled = Handlebars.compile(template);
   var target = $("#cont");
   target.html("");
+
+  callFilms(userMoviesOrTV, compiled, target);
+  callTVseries(userMoviesOrTV, compiled, target);
+
+}
+
+
+// ##### Secondary functions Sec #####
+function callFilms(userMoviesOrTV, compiled, target){
+
   $.ajax({
     url : "https://api.themoviedb.org/3/search/movie?api_key=8b7e062b77e264c1bb194fda0388a653",
     method : "GET",
@@ -49,9 +50,6 @@ function insideAPIMovie(moviesfromAPI, compiled, target){
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
 
-
-    // voteConverter(votefromAPI);
-
     var movie2html = compiled({ title:titlefromAPI,
                                 origTitle:origTitlefromAPI,
                                 flag: flag,
@@ -61,17 +59,11 @@ function insideAPIMovie(moviesfromAPI, compiled, target){
 
 
     target.append(movie2html);
-
-
-
   }//for
 }
 
-function callTVseries(userMoviesOrTV){
-  var template = $("#template").html();
-  var compiled = Handlebars.compile(template);
-  var target = $("#cont");
-  target.html("");
+function callTVseries(userMoviesOrTV, compiled, target){
+
   $.ajax({
     url : "https://api.themoviedb.org/3/search/tv?api_key=8b7e062b77e264c1bb194fda0388a653",
     method : "GET",
@@ -79,6 +71,7 @@ function callTVseries(userMoviesOrTV){
 
     success: function(data, state) {
       var tvfromAPI = data["results"];
+
       insideAPItv(tvfromAPI, compiled, target);
 
     },
@@ -98,21 +91,17 @@ function insideAPItv(tvfromAPI, compiled, target){
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
 
-
-    // voteConverter(votefromAPI);
-
     var movie2html = compiled({ title:namefromAPI,
-      origTitle:origNamefromAPI,
-      flag: flag,
-      voteExtended: votefromAPI,
-      stars: stars
-    })
-
+                                origTitle:origNamefromAPI,
+                                flag: flag,
+                                voteExtended: votefromAPI,
+                                stars: stars })
 
     target.append(movie2html);
   }//for
 }
 
+// Funzione per identificare la lingua e le bandiere
 function flagF(langfromAPI){
   var flag = ""
   if (langfromAPI == "en") {
@@ -126,9 +115,11 @@ function flagF(langfromAPI){
   } else {
     flag = langfromAPI;
     return flag;
-
   }
 }
+
+
+// Funzione stampare le stelline al posto del voto in int
 function starMultiplier2(voteFrom10to5){
   var test1 = "";
   for (var i = 0; i < voteFrom10to5; i++) {
@@ -140,20 +131,5 @@ function starMultiplier2(voteFrom10to5){
   return test1;
 
 }
-function starMultiplier(movie2html, voteFrom10to5){
-  var test1 = "";
-
-  for (var i = 0; i < voteFrom10to5; i++) {
-    test1 = test1 + "<i id='littlestar' class='far fa-star'></i>";
-  }
-  var allStars = $(movie2html).find("#starElement");
-  var allStars2 = allStars.append(test1);
-  console.log(allStars);
-
-  console.log(allStars2);
-  var movietest = allStars.append(allStars2);
-  return movietest;
-}
-
 
 $(document).ready(init);
