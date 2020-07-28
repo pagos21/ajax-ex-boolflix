@@ -22,23 +22,25 @@ function writeAPI(userMovie){
 
     success: function(data, state) {
       var moviesfromAPI = data["results"];
-      console.log("yo ".repeat(3));
       for (var i = 0; i < moviesfromAPI.length; i++) {
+        // var film = moviesfromAPI[i]
         var titlefromAPI = moviesfromAPI[i].title;
         var origTitlefromAPI = moviesfromAPI[i].original_title;
         var langfromAPI = moviesfromAPI[i].original_language;
         var votefromAPI = moviesfromAPI[i].vote_average;
         var voteFrom10to5 = Math.ceil(votefromAPI / 2);
-        starMultiplier(voteFrom10to5)
         // voteConverter(votefromAPI);
 
         var movie2html = compiled({ title:titlefromAPI,
                                     origTitle:origTitlefromAPI,
                                     lang:langfromAPI,
                                     voteExtended: votefromAPI,
-                                    vote: voteFrom10to5 })
+                                    stars: "<i id='littlestar' class='far fa-star'></i>"
+                                    })
 
+        // var test0 = starMultiplier(movie2html, voteFrom10to5);
         target.append(movie2html);
+
       }//for
     },
     error:function (error) {
@@ -48,11 +50,19 @@ function writeAPI(userMovie){
 
 } // function
 
-function starMultiplier(voteFrom10to5){
-  var test = $("#littlestar").clone();
+function starMultiplier(movie2html, voteFrom10to5){
+  var test1 = "";
+
   for (var i = 0; i < voteFrom10to5; i++) {
-    console.log("N stelline");
+    test1 = test1 + "<i id='littlestar' class='far fa-star'></i>";
   }
+  var allStars = $(movie2html).find("#starElement");
+  var allStars2 = allStars.append(test1);
+  console.log(allStars);
+
+  console.log(allStars2);
+  var movietest = $(movie2html).find("#starElement").append(allStars2);
+  return movietest;
 }
 
 $(document).ready(init);
