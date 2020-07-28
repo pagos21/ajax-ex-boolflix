@@ -29,13 +29,25 @@ function writeAPI(userMovie){
         var langfromAPI = moviesfromAPI[i].original_language;
         var votefromAPI = moviesfromAPI[i].vote_average;
         var voteFrom10to5 = Math.ceil(votefromAPI / 2);
-        var test1 = starMultiplier2(voteFrom10to5);
+
+        var test1 = starMultiplier2(voteFrom10to5); //non renderizza le icone
+
+        switch(langfromAPI) {
+          case "en":
+          flag = $("#usa");
+          break;
+          case "it":
+          flag = "Italiano"
+          break;
+          default:
+          flag = langfromAPI;
+        }
 
         // voteConverter(votefromAPI);
 
         var movie2html = compiled({ title:titlefromAPI,
                                     origTitle:origTitlefromAPI,
-                                    lang:langfromAPI,
+                                    lang:flag,
                                     voteExtended: votefromAPI,
                                     stars: test1
                                     })
@@ -54,12 +66,26 @@ function writeAPI(userMovie){
 
 } // function
 
+
+function flags(langfromAPI){
+  switch(langfromAPI) {
+    case "en":
+    flag = $("#usa").clone();
+    break;
+    case "it":
+    flag = $("#it").clone();
+    break;
+    default:
+    flag = langfromAPI;
+  }
+  return flag;
+}
+
 function starMultiplier2(voteFrom10to5){
   var test1 = "";
   for (var i = 0; i < voteFrom10to5; i++) {
     test1 = test1 + "<i class='far fa-star'></i>";
   }
-  console.log(test1);
   // var toprint = $("#starElement").append(test1);
   return test1;
 
