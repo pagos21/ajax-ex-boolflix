@@ -9,6 +9,15 @@ function init(){
 
 
 // ##### functions Sec #####
+function writeAPI(userMoviesOrTV){
+
+  callFilms(userMoviesOrTV);
+  callTVseries(userMoviesOrTV);
+
+
+} // function
+
+
 function callFilms(userMoviesOrTV){
   var template = $("#template").html();
   var compiled = Handlebars.compile(template);
@@ -38,16 +47,7 @@ function insideAPIMovie(moviesfromAPI, compiled, target){
     var votefromAPI = moviesfromAPI[i].vote_average;
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
-
-    //
-    var flag = ""
-    if (langfromAPI == "en") {
-      flag = "img/USA.png"
-    } else if (langfromAPI == "it") {
-      flag = "img/it.png"
-    } else {
-      flag = langfromAPI
-    }
+    var flag = flagF(langfromAPI);
 
 
     // voteConverter(votefromAPI);
@@ -96,16 +96,7 @@ function insideAPItv(tvfromAPI, compiled, target){
     var votefromAPI = tvfromAPI[i].vote_average;
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
-
-    //
-    var flag = ""
-    if (langfromAPI == "en") {
-      flag = "img/USA.png"
-    } else if (langfromAPI == "it") {
-      flag = "img/it.png"
-    } else {
-      flag = langfromAPI
-    }
+    var flag = flagF(langfromAPI);
 
 
     // voteConverter(votefromAPI);
@@ -122,25 +113,26 @@ function insideAPItv(tvfromAPI, compiled, target){
   }//for
 }
 
+function flagF(langfromAPI){
+  var flag = ""
+  if (langfromAPI == "en") {
+    flag = "img/USA.png"
+    return flag;
 
+  } else if (langfromAPI == "it") {
+    flag = "img/it.png"
+    return flag;
 
-function writeAPI(userMoviesOrTV){
+  } else {
+    flag = langfromAPI;
+    return flag;
 
-  callFilms(userMoviesOrTV)
-  callTVseries(userMoviesOrTV)
-
-
-} // function
-
-
-function flags(langfromAPI){
-
+  }
 }
-
 function starMultiplier2(voteFrom10to5){
   var test1 = "";
   for (var i = 0; i < voteFrom10to5; i++) {
-    test1 = test1 + "<i class='far fa-star'></i>";
+    test1 = test1 + "<i class='fas fa-star'></i>";
   }
   if (voteFrom10to5 == 0) {
     test1 = "Nessun voto";
@@ -148,8 +140,6 @@ function starMultiplier2(voteFrom10to5){
   return test1;
 
 }
-
-
 function starMultiplier(movie2html, voteFrom10to5){
   var test1 = "";
 
@@ -164,5 +154,6 @@ function starMultiplier(movie2html, voteFrom10to5){
   var movietest = allStars.append(allStars2);
   return movietest;
 }
+
 
 $(document).ready(init);

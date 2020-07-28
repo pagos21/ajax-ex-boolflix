@@ -12,9 +12,14 @@ body{
 
 }
 
+ul{
+  height: 100%;
+}
+
 li{
   list-style: none;
   padding: 7%;
+  height: 25%;
 }
 
 header{
