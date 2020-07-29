@@ -16,13 +16,14 @@
       <div class="movie">
         <h3>FILM</h3>
         <div class="cover">
-          <img src="{{{cover}}}" onerror="this.src='img/no-image.png'; style='width:89%; margin:0 15px;'" alt="404 not found">
+          <img src="{{{cover}}}"  alt="{{title}}">
         </div>
-        <ul>
+        <ul class="info">
           <li>Titolo: {{title}}</li>
           <li>Titolo Originale: {{origTitle}}</li>
           <li> Lingua: <img src="{{{flag}}}" alt="{{flag}}"> {{lang}}</li>
           <li id="voteStars" data-voteExtended="{{voteExtended}}">Voto: {{{stars}}}</li>
+          <li class="overview btn"> Trama: {{overview}}</li>
         </ul>
       </div>
     </script>
@@ -31,13 +32,15 @@
       <div class="movie">
         <h3>TV Series</h3>
         <div class="cover">
-          <img src="{{{cover}}}" onerror="this.src='img/no-image.png'; style='width:89%; margin:0 15px;'" alt="404 not found">
+          <img src="{{{cover}}}" alt="{{name}}">
         </div>
-        <ul>
+        <ul class="info">
           <li>Titolo: {{name}}</li>
           <li>Titolo Originale: {{origName}}</li>
           <li> Lingua: <img src="{{{flag}}}" alt="{{flag}}"> {{lang}}</li>
           <li id="voteStars" data-voteExtended="{{voteExtended}}">Voto: {{{stars}}}</li>
+          <li class="overview btn"> Trama: {{overview}}</li>
+
         </ul>
       </div>
     </script>
@@ -48,18 +51,19 @@
     <title>Boolflix</title>
   </head>
   <body>
+    <header>
+      <h3>BOOLFLIX</h3>
+      <input id="inp" type="text" name="" placeholder="Insert Movie name..." ondblclick="this.value=''" value="" onkeypress="enterKey(event)">
+      <!-- <button id="btn" type="button" name="button">Search!</button> -->
+    </header>
     <div id="big_cont">
-      <header>
-        <input id="inp" type="text" name="" placeholder="Insert Movie name..." ondblclick="this.value=''" value="">
-        <button id="btn" type="button" name="button">Search!</button>
-      </header>
+
 
       <div id="cont" class="cont">
 
 
       </div>
     </div>
-
 
 
     <script type="text/javascript" src="JS/script.js">

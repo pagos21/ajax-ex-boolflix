@@ -1,12 +1,17 @@
 
-function init(){
 
-  $("#btn").click(function(){
+
+function enterKey(event){
+  if (event.keyCode === 13){
     var userMoviesOrTV = $("#inp").val();
     writeAPI(userMoviesOrTV);
-  })
-
+  }
+  // $(document).on("click", ".btn", function(){
+  //
+  // })
 }
+
+
 
 // ##### MAIN functions Sec #####
 function writeAPI(userMoviesOrTV){
@@ -69,24 +74,25 @@ function insideAPI(fromAPI, compiled, target){
     var langfromAPI = fromAPI[i].original_language;
     var votefromAPI = fromAPI[i].vote_average;
     var coverfromAPI = fromAPI[i].poster_path;
-
+    var overviewfromAPI = fromAPI[i].overview;
     var namefromAPI = fromAPI[i].name;
     var origNamefromAPI = fromAPI[i].original_name;
 
-    var cover2print = "https://image.tmdb.org/t/p/w185/" + coverfromAPI;
-    console.log(cover2print);
+
+    var cover2print = "https://image.tmdb.org/t/p/w300/" + coverfromAPI;
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
 
     var movie2html = compiled({ cover:cover2print,
                                 title:titlefromAPI,
+                                name:namefromAPI,
                                 origTitle:origTitlefromAPI,
-                                name: namefromAPI,
                                 origName: origNamefromAPI,
                                 flag: flag,
                                 voteExtended: votefromAPI,
-                                stars: stars
+                                stars: stars,
+                                overview:overviewfromAPI
     })
 
 
@@ -125,4 +131,7 @@ function starMultiplier2(voteFrom10to5){
 
 }
 
-$(document).ready(init);
+
+
+
+$(document).ready(enterKey);
