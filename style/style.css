@@ -12,13 +12,17 @@ body{
 
 }
 
+h3{
+  text-align: center;
+}
+
 ul{
 }
 
 li{
   list-style: none;
   padding: 7%;
-  height: 65px;
+  height: 85px;
 }
 
 header{
