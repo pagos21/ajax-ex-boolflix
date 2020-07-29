@@ -14,16 +14,18 @@
 
     <script id="template" type="text/x-handlebars-template">
       <div class="movie">
+        <div class="cover">
+          <img src="{{{cover}}}" onerror="this.src='img/no-image.png'; style='width:89%; margin:0 15px;'" alt="404 not found">
+
+        </div>
         <ul>
           <li>Titolo: {{title}}</li>
           <li>Titolo Originale: {{origTitle}}</li>
           <li> Lingua: <img src="{{{flag}}}" alt="{{flag}}"> {{lang}}</li>
-          <li id="voteStars" data-voteExtended="{{voteExtended}}">Voto: {{{stars}}}
-            <div id="starElement">
-           </div>
-         </li>
+          <li id="voteStars" data-voteExtended="{{voteExtended}}">Voto: {{{stars}}}</li>
         </ul>
       </div>
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
     <script src="https://kit.fontawesome.com/d4368e456d.js" crossorigin="anonymous"></script>
@@ -43,7 +45,6 @@
 
       </div>
     </div>
-
 
 
 

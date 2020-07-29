@@ -46,11 +46,15 @@ function insideAPIMovie(moviesfromAPI, compiled, target){
     var origTitlefromAPI = moviesfromAPI[i].original_title;
     var langfromAPI = moviesfromAPI[i].original_language;
     var votefromAPI = moviesfromAPI[i].vote_average;
+    var coverfromAPI = moviesfromAPI[i].poster_path;
+    var cover2print = "https://image.tmdb.org/t/p/w185/" + coverfromAPI;
+    console.log(cover2print);
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
 
-    var movie2html = compiled({ title:titlefromAPI,
+    var movie2html = compiled({ cover:cover2print,
+                                title:titlefromAPI,
                                 origTitle:origTitlefromAPI,
                                 flag: flag,
                                 voteExtended: votefromAPI,

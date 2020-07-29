@@ -8,18 +8,17 @@ body{
 }
 
 #big_cont{
-  padding: 0 10%;
+  padding: 0 5%;
 
 }
 
 ul{
-  height: 100%;
 }
 
 li{
   list-style: none;
   padding: 7%;
-  height: 25%;
+  height: 65px;
 }
 
 header{
@@ -59,8 +58,13 @@ button{
   font-weight: bold;
 }
 
-.movie img{
+
+.movie ul li img{
   width: 10%;
+}
+
+.cover{
+  margin: 20px auto;
 }
 
 .hide{
