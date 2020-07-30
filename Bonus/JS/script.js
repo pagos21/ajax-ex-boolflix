@@ -7,6 +7,9 @@ function enterKey(event){
     writeAPI(userMoviesOrTV);
   }
   $(document).on("click", ".btn", modal) // non so bene il perchè ma se creo una nuova funzione anonima e richiamo la modale il $(this) restituisce Window e non ti fa selezionare niente
+  var castmax5 = callactors();
+  console.log(castmax5);
+
 }
 
 
@@ -23,6 +26,7 @@ function writeAPI(userMoviesOrTV){
   target.html("");
 
   callFilms(userMoviesOrTV, compiled, target);
+
   callTVseries(userMoviesOrTV, compiled2, target);
 
 }
@@ -75,7 +79,7 @@ function insideAPI(fromAPI, compiled, target){
     var overviewfromAPI = fromAPI[i].overview;
     var namefromAPI = fromAPI[i].name;
     var origNamefromAPI = fromAPI[i].original_name;
-
+    var apiID = fromAPI[i].id;
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
@@ -96,6 +100,7 @@ function insideAPI(fromAPI, compiled, target){
 
     target.append(movie2html);
   }//for
+
 }
 
 // Funzione per identificare la lingua e le bandiere
@@ -130,13 +135,6 @@ function starMultiplier2(voteFrom10to5){
 }
 
 
-function semiModal(){
-  var thisRev = $(this).find("#myModal");
-  console.log(thisRev);
-}
-
-
-
 function modal(){
 
   var modal = $(this).parents(".movie").next("#myModal");
@@ -154,5 +152,25 @@ function modal(){
   });
 }
 
+
+function callactors(){
+  var cast =$.ajax({
+    url : " http://api.themoviedb.org/3/movie/550/credits?api_key=8b7e062b77e264c1bb194fda0388a653",
+    method : "GET",
+
+    success: function(data, state) {
+      var actors = data["cast"];
+      var castmax5 = [];
+      for (var i = 0; castmax5.length <5; i++) {
+         castmax5.push(actors[i].name);
+      }
+      console.log(castmax5);
+    },
+    error:function (error) {
+      console.log('error from actors series API');
+    }
+  }) // ajax
+  console.log(cast);
+}
 
 $(document).ready(enterKey);
