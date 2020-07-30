@@ -33,13 +33,12 @@
       </div>
 
       <!-- The Modal -->
-      <div id="myModal" class="modal">
-
+      <div id="myModal" data-selector={{modalSelector}} class="modal">
         <!-- Modal content -->
         <div class="modal-content">
           <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>Trama</h2>
+            <h2>Trama di {{title}}</h2>
           </div>
           <div class="modal-body">
             <p>{{overview}}</p>
@@ -47,13 +46,19 @@
         </div>
 
       </div>
+
     </script>
 
     <script id="template2" type="text/x-handlebars-template">
       <div class="movie">
         <h3>TV Series</h3>
         <div class="cover">
-          <img src="{{{cover}}}" alt="{{name}}">
+          {{#if cover}}
+          <img src="https://image.tmdb.org/t/p/w300/{{{cover}}}"  alt="">
+          {{else}}
+          <img class="noImg" src="img/no-image.png"  alt="Non ce!">
+          {{/if}}
+
         </div>
         <ul class="info">
           <li>Titolo: {{name}}</li>
@@ -63,6 +68,20 @@
           <li class="overview btn"> Trama: {{overview}}</li>
 
         </ul>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal" data-selector={{modalSelector}} class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Trama di {{name}}</h2>
+          </div>
+          <div class="modal-body">
+            <p>{{overview}}</p>
+          </div>
+        </div>
+
       </div>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>

@@ -7,9 +7,10 @@ function enterKey(event){
     writeAPI(userMoviesOrTV);
   }
 
-  $(document).on("click", ".btn", function(){
-    modal();
-  })
+
+
+
+  $(document).on("click", ".btn", modal) // non so bene il perchè ma se creo una nuova funzione anonima e richiamo la modale il $(this) restituisce Window e non ti fa selezionare niente
 }
 
 
@@ -82,6 +83,7 @@ function insideAPI(fromAPI, compiled, target){
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
+    var incremental = i;
 
     var movie2html = compiled({ cover:coverfromAPI,
                                 title:titlefromAPI,
@@ -91,7 +93,8 @@ function insideAPI(fromAPI, compiled, target){
                                 flag: flag,
                                 voteExtended: votefromAPI,
                                 stars: stars,
-                                overview:overviewfromAPI
+                                overview:overviewfromAPI,
+                                modalSelector: incremental
     })
 
 
@@ -132,7 +135,7 @@ function starMultiplier2(voteFrom10to5){
 
 
 function semiModal(){
-  var thisRev = $(this).find(".btn");
+  var thisRev = $(this).find("#myModal");
   console.log(thisRev);
 }
 
@@ -140,23 +143,18 @@ function semiModal(){
 
 function modal(){
 
-var modal = $(this).find("#myModal");
-console.log(modal);
-
+var modal = $(this).parents(".movie").next("#myModal");
 var span = $(".close");
-
-modal.show();
-
-
+  modal.show();
 
 span.click(function(){
-modal.hide();
+  modal.hide();
 })
 $(document).mouseup(function (e){
-var container = $(".modal-content");
-if (!container.is(e.target) && container.has(e.target).length == 0){
-modal.fadeOut("slow");
-}
+  var container = $(".modal-content");
+  if (!container.is(e.target) && container.has(e.target).length == 0){
+  modal.fadeOut("slow");
+  }
 });
 }
 
