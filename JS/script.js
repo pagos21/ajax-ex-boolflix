@@ -6,13 +6,10 @@ function enterKey(event){
     var userMoviesOrTV = $("#inp").val();
     writeAPI(userMoviesOrTV);
   }
+
   $(document).on("click", ".btn", function(){
-    var thisRev = $(this).find("li.btn");
-    console.log(thisRev);
+    modal();
   })
-  // $(document).on("click", ".btn", function(){
-  //
-  // })
 }
 
 
@@ -138,5 +135,30 @@ function semiModal(){
   var thisRev = $(this).find(".btn");
   console.log(thisRev);
 }
+
+
+
+function modal(){
+
+var modal = $(this).find("#myModal");
+console.log(modal);
+
+var span = $(".close");
+
+modal.show();
+
+
+
+span.click(function(){
+modal.hide();
+})
+$(document).mouseup(function (e){
+var container = $(".modal-content");
+if (!container.is(e.target) && container.has(e.target).length == 0){
+modal.fadeOut("slow");
+}
+});
+}
+
 
 $(document).ready(enterKey);
