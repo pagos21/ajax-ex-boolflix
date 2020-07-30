@@ -16,9 +16,6 @@ h3{
   text-align: center;
 }
 
-ul{
-}
-
 li{
   list-style: none;
   padding: 3% 5%;
@@ -54,7 +51,6 @@ button{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* width: 853px; */
   margin: 20px auto;
 }
 
@@ -63,8 +59,6 @@ button{
   position: relative;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
   background-color: black;
   width: 350px;
   height: 515px;
@@ -72,6 +66,11 @@ button{
   border-radius: 10px;
   font-weight: bold;
   color: white;
+}
+
+.noImg{
+  width: 90%;
+  margin: 0 18px;
 }
 
 
@@ -89,6 +88,7 @@ button{
   opacity: 0;
   background-color: black;
   color: white;
+  border: 0px solid white;
   transition: all .5s;
   border-radius: 10px;
   height: 100%;
@@ -102,6 +102,7 @@ button{
 
 .info:hover{
   opacity: .8;
+  border: 1px solid white;
 }
 
 .overview{

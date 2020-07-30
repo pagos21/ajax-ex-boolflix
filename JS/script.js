@@ -6,6 +6,10 @@ function enterKey(event){
     var userMoviesOrTV = $("#inp").val();
     writeAPI(userMoviesOrTV);
   }
+  $(document).on("click", ".btn", function(){
+    var thisRev = $(this).find("li.btn");
+    console.log(thisRev);
+  })
   // $(document).on("click", ".btn", function(){
   //
   // })
@@ -78,13 +82,11 @@ function insideAPI(fromAPI, compiled, target){
     var namefromAPI = fromAPI[i].name;
     var origNamefromAPI = fromAPI[i].original_name;
 
-
-    var cover2print = "https://image.tmdb.org/t/p/w300/" + coverfromAPI;
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
 
-    var movie2html = compiled({ cover:cover2print,
+    var movie2html = compiled({ cover:coverfromAPI,
                                 title:titlefromAPI,
                                 name:namefromAPI,
                                 origTitle:origTitlefromAPI,
@@ -132,6 +134,9 @@ function starMultiplier2(voteFrom10to5){
 }
 
 
-
+function semiModal(){
+  var thisRev = $(this).find(".btn");
+  console.log(thisRev);
+}
 
 $(document).ready(enterKey);

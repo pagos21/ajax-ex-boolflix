@@ -16,7 +16,12 @@
       <div class="movie">
         <h3>FILM</h3>
         <div class="cover">
-          <img src="{{{cover}}}"  alt="{{title}}">
+          {{#if cover}}
+          <img src="https://image.tmdb.org/t/p/w300/{{{cover}}}"  alt="">
+          {{else}}
+          <img class="noImg" src="img/no-image.png"  alt="Non ce!">
+          {{/if}}
+
         </div>
         <ul class="info">
           <li>Titolo: {{title}}</li>
