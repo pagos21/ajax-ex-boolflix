@@ -133,7 +133,7 @@ button{
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 35%;
+  width: 50%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   animation-name: animatetop;
   animation-duration: 0.4s;
@@ -184,4 +184,18 @@ button{
   padding: 5px 0;
   line-height: 1.6;
 
+}
+
+/* MQ */
+
+@media screen and (max-width:1233px) {
+  .modal-content{
+    width: 75%;
+  }
+}
+
+@media screen and (max-width:1000px) {
+  .modal-content{
+    width: 90%;
+  }
 }

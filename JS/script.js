@@ -6,10 +6,6 @@ function enterKey(event){
     var userMoviesOrTV = $("#inp").val();
     writeAPI(userMoviesOrTV);
   }
-
-
-
-
   $(document).on("click", ".btn", modal) // non so bene il perchè ma se creo una nuova funzione anonima e richiamo la modale il $(this) restituisce Window e non ti fa selezionare niente
 }
 
@@ -143,19 +139,19 @@ function semiModal(){
 
 function modal(){
 
-var modal = $(this).parents(".movie").next("#myModal");
-var span = $(".close");
-  modal.show();
+  var modal = $(this).parents(".movie").next("#myModal");
+  var span = $(".close");
+    modal.show();
 
-span.click(function(){
-  modal.hide();
-})
-$(document).mouseup(function (e){
-  var container = $(".modal-content");
-  if (!container.is(e.target) && container.has(e.target).length == 0){
-  modal.fadeOut("slow");
-  }
-});
+  span.click(function(){
+    modal.hide();
+  })
+  $(document).mouseup(function (e){
+    var container = $(".modal-content");
+    if (!container.is(e.target) && container.has(e.target).length == 0){
+    modal.fadeOut("slow");
+    }
+  });
 }
 
 
