@@ -148,11 +148,14 @@ function modal(){
 
   span.click(function(){
     modal.hide();
+    $("#cast li").remove();
   })
   $(document).mouseup(function (e){
     var container = $(".modal-content");
     if (!container.is(e.target) && container.has(e.target).length == 0){
-    modal.fadeOut("slow");
+    modal.fadeOut("slow", function(){
+      $("#cast li").remove();
+    });
     }
   });
 }
@@ -165,13 +168,14 @@ function callActors(id){
 
     success: function(data, state) {
       var actors = data["cast"];
-      castmax5 = [];
+      var castmax5 = [];
       for (var i = 0; castmax5.length <5; i++) {
          castmax5.push(`<li>{${i+1}} ${actors[i].name}</li>`);
       }
       var castIdLocation = $(`[data-cast="${id}"]`);
       var cast2html = castIdLocation.find("#cast")
       cast2html.append(castmax5);
+
 
       console.log(castmax5);
     },
