@@ -6,11 +6,9 @@ function enterKey(event){
     var userMoviesOrTV = $("#inp").val();
     writeAPI(userMoviesOrTV);
   }
-  $(document).on("click", ".btn", modal) // non so bene il perchè ma se creo una nuova funzione anonima e richiamo la modale il $(this) restituisce Window e non ti fa selezionare niente
-  var castmax5 = callactors();
-  console.log(castmax5);
-
 }
+
+$(document).on("click", ".btn", modal) // non so bene il perchè ma se creo una nuova funzione anonima e richiamo la modale il $(this) restituisce Window e non ti fa selezionare niente
 
 
 
@@ -83,7 +81,6 @@ function insideAPI(fromAPI, compiled, target){
     var voteFrom10to5 = Math.ceil(votefromAPI / 2);
     var stars = starMultiplier2(voteFrom10to5); //Rendering possibile solo con escape HTML
     var flag = flagF(langfromAPI);
-    var incremental = i;
 
     var movie2html = compiled({ cover:coverfromAPI,
                                 title:titlefromAPI,
@@ -94,11 +91,13 @@ function insideAPI(fromAPI, compiled, target){
                                 voteExtended: votefromAPI,
                                 stars: stars,
                                 overview:overviewfromAPI,
-                                modalSelector: incremental
+                                castIdetifier: apiID
+
     })
 
 
     target.append(movie2html);
+
   }//for
 
 }
@@ -138,8 +137,14 @@ function starMultiplier2(voteFrom10to5){
 function modal(){
 
   var modal = $(this).parents(".movie").next("#myModal");
+  var castFinder = $(this).parents(".movie").next("#myModal").find(".modal-body");
+  var id = castFinder.data("cast");
+  console.log(id);
+
   var span = $(".close");
-    modal.show();
+  callActors(id);
+  modal.show();
+
 
   span.click(function(){
     modal.hide();
@@ -153,24 +158,27 @@ function modal(){
 }
 
 
-function callactors(){
-  var cast =$.ajax({
-    url : " http://api.themoviedb.org/3/movie/550/credits?api_key=8b7e062b77e264c1bb194fda0388a653",
+function callActors(id){
+  $.ajax({
+    url :   `http://api.themoviedb.org/3/movie/${id}/credits?api_key=8b7e062b77e264c1bb194fda0388a653`,
     method : "GET",
 
     success: function(data, state) {
       var actors = data["cast"];
-      var castmax5 = [];
+      castmax5 = [];
       for (var i = 0; castmax5.length <5; i++) {
-         castmax5.push(actors[i].name);
+         castmax5.push(`<li>{${i+1}} ${actors[i].name}</li>`);
       }
+      var castIdLocation = $(`[data-cast="${id}"]`);
+      var cast2html = castIdLocation.find("#cast")
+      cast2html.append(castmax5);
+
       console.log(castmax5);
     },
     error:function (error) {
       console.log('error from actors series API');
     }
   }) // ajax
-  console.log(cast);
 }
 
 $(document).ready(enterKey);
