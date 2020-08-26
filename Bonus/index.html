@@ -102,7 +102,14 @@
   <body>
     <header>
       <h3>BOOLFLIX</h3>
-      <input id="inp" type="text" name="" placeholder="Insert Movie name..." ondblclick="this.value=''" value="" onkeypress="enterKey(event)">
+      <div class="">
+        <select id="genre" class="" name="">
+          <option value="28">Action</option>
+          <option value="16">Animated</option>
+        </select>
+        <input id="inp" type="text" name="" placeholder="Insert Movie name..." ondblclick="this.value=''" value="" onkeypress="enterKey(event)">
+      </div>
+
       <!-- <button id="btn" type="button" name="button">Search!</button> -->
     </header>
     <div id="big_cont">
@@ -113,8 +120,6 @@
 
       </div>
     </div>
-
-
 
     <script type="text/javascript" src="JS/script.js">
 

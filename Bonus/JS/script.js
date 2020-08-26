@@ -4,6 +4,8 @@
 function enterKey(event){
   if (event.keyCode === 13){
     var userMoviesOrTV = $("#inp").val();
+    var genre = $("#genre").val();
+    console.log(genre);
     writeAPI(userMoviesOrTV);
   }
 }
@@ -123,14 +125,17 @@ function flagF(langfromAPI){
 // Funzione stampare le stelline al posto del voto in int
 function starMultiplier2(voteFrom10to5){
   var test1 = "";
-  for (var i = 0; i < voteFrom10to5; i++) {
-    test1 = test1 + "<i class='fas fa-star'></i>";
+  for (var i = 0; i < 5; i++) {
+    if (i < voteFrom10to5) {
+      test1 += "<i class='fas fa-star'></i>";
+    } else {
+      test1 += "<i class='far fa-star'></i>";
+    }
   }
   if (voteFrom10to5 == 0) {
     test1 = "Nessun voto";
   }
   return test1;
-
 }
 
 
@@ -153,7 +158,7 @@ function modal(){
   $(document).mouseup(function (e){
     var container = $(".modal-content");
     if (!container.is(e.target) && container.has(e.target).length == 0){
-    modal.fadeOut("slow", function(){
+    modal.fadeOut(250, function(){
       $("#cast li").remove();
     });
     }
